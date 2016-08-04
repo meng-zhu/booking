@@ -31,22 +31,23 @@
          <table  style="border:3px #FFAC55 dashed;padding:5px;" rules="all" cellpadding='5' width="500" align="center";>
             <tr>
                 <td><center>
-                    活動名稱
+                    <strong>活動名稱</strong>
                 </center></td>
                 <td><center>
-                    報名狀態
+                    <strong>報名狀態</strong>
+                </center></td>
+                <td width="120"><center>
+                    <strong>已報名名單</strong><br>
+                    <font size =2>(已報名/總人數)</font>
                 </center></td>
                 <td><center>
-                    已報名名單
+                    <strong>編輯</strong>
                 </center></td>
                 <td><center>
-                    編輯
+                    <strong>可報名名單</strong>
                 </center></td>
                 <td><center>
-                    可報名名單
-                </center></td>
-                <td><center>
-                    刪除
+                    <strong>刪除</strong>
                 </center></td>
             </tr>
             <?php foreach($data as $key){?>
@@ -79,7 +80,7 @@
                     ?>    
                 </center></td>
                 <td><center>
-                     <a href="#?aId=<?php echo $key['aId'];?>"><?php echo "已報名人數/".$key['num']?></a>
+                     <a href="#?aId=<?php echo $key['aId'];?>"><?php echo $key['join_num']."/".$key['num']?></a>
                 </center></td>
                 <td><center>
                      <a  href="MHome/update_act?aId=<?php echo $key['aId'];?>"> <input type="button" value="編輯"></a>

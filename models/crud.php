@@ -48,8 +48,21 @@ class crud
       return "活動刪除完成";
    }
 /**************************************************一般使用者************************************************************************************/
+   public function check_join_num($db,$aId){
+      $result = $db->prepare("SELECT `num`,`join_num` FROM `act` WHERE `aId` = ?");
+      $result->execute(array($aId));//依序取代sql中"?"的值，並執行
+      $row = $result->fetchAll();
+      return $row;
+   }
    public function join_act($db,$num,$partner,$aId){
-      
+      $result = $db->prepare("INSERT INTO `join`( `num`, `partner`, `aId`) VALUES (?,?,?)");
+      $result->execute(array($num,$partner,$aId));
+      return "報名完成";
+   }
+   public function update_act_join_num($db,$aId,$join_total){
+      $result2 = $db->prepare("UPDATE `act` SET `join_num`=`join_num`+? WHERE `aId` = ?");
+      $result2->execute(array($join_total,$aId));
+      return "資料更新完成";
    }
 }
 ?>

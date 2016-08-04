@@ -20,7 +20,7 @@ date_default_timezone_set("Asia/Taipei");
                         }else
                         {
                             alert("報名失敗");
-                        }   
+                        }
                     }else{//不能攜伴
                         $.get("../UData/join_act?aId="+aId+"&num="+num,res);
                     }
@@ -32,12 +32,10 @@ date_default_timezone_set("Asia/Taipei");
                 
             }
             function res(data){
-                // alert(data);
-                if(data == "報名成功"){
-                     alert("報名成功");
-                }else{
-                     alert("報名失敗，名額不足"); 
-                }
+              
+                alert(data); 
+                window.location.href="../Home/show_act?aId="+$("#aId").val();
+            
                 
             }
         </script>
@@ -58,7 +56,7 @@ date_default_timezone_set("Asia/Taipei");
                     活動概述
                 </CENTER></td>
                 <td><CENTER>
-                    報名人數上限
+                    活動人數限制
                 </CENTER></td>
                 <td><CENTER>
                     是否可攜伴
@@ -77,7 +75,7 @@ date_default_timezone_set("Asia/Taipei");
                     <?php echo $key['body']; ?>
                 </CENTER></td>
                 <td><CENTER>
-                    <?php echo $key['num']; ?>
+                    <?php echo $key['join_num']."/".$key['num']?>
                 </CENTER></td>
                 <td><CENTER>
                     <?php echo $key['partner']; ?>
@@ -102,14 +100,20 @@ date_default_timezone_set("Asia/Taipei");
                     $now = date('Y-m-d G:i');
                     $now_num = strtotime ($now);
 
+                    $num = $key['num'];
+                    $join_num = $key['join_num'];
                     
                     if($start_num <= $now_num && $end_num > $now_num){
+                        if( $num > $join_num ){
                 ?>
                         <td COLSPAN=5><CENTER><input type="button" value="我要報名" onclick="join()"></CENTER></td>
                         
                 <?php    }else{ ?>
-                        <td COLSPAN=5><CENTER><a  href="UData/add_act?aId=<?php echo $key['aId'];?>"><input type="button" value="我要報名" disabled></a></CENTER></td>
-                <?php    }      ?>
+                        <td COLSPAN=5><CENTER><input type="button" value="名額已滿" disabled></CENTER></td>
+                <?php    } 
+                    }else{ ?>
+                        <td COLSPAN=5><CENTER><input type="button" value="我要報名" disabled></CENTER></td>
+                <?php } ?>
                
             </tr>
             <tr>

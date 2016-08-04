@@ -11,9 +11,9 @@ date_default_timezone_set("Asia/Taipei");
 
 　  <table  style="border:3px #FFAC55 dashed;padding:5px;" rules="all" cellpadding='5' width="500" align="center";>
         <tr>
-            <td><center>活動名稱</center></td>
-            <td><center>活動詳細資訊</center></td>
-            <td><center>活動狀態</center></td>
+            <td><center><strong>活動名稱</strong></center></td>
+            <td><center><strong>活動詳細資訊</strong></center></td>
+            <td><center><strong>活動狀態</strong></center></td>
         </tr>
          <?php foreach($data as $key){?>
         <tr>
@@ -32,9 +32,6 @@ date_default_timezone_set("Asia/Taipei");
               
                     $now = date('Y-m-d G:i');
                     $now_num = strtotime ($now);
-                    
-                    // echo "開始時間: ".$start_num."<br>截止時間: ".$end_num."<br>現在時間: ".$now_num;
-                    
                     
                     if($start_num <= $now_num && $end_num > $now_num){
                         echo "開放報名中";
