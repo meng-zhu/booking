@@ -11,6 +11,7 @@
           $.get('../MData/login?account='+account+'&password=' + password ,res)
         
         }function res(data) {
+            // alert(data);
           if(data=="帳號或密碼輸入錯誤"){
                 alert(data);
           }else{

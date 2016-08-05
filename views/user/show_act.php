@@ -5,34 +5,47 @@ date_default_timezone_set("Asia/Taipei");
     <head>
         <script type="text/javascript" src="../jquery.js"></script>
         <script type="text/javascript">
-          
+        
+            $(document).ready(immediat);
+            var int=self.setInterval("immediat()",5000)//每5秒刷新夜面
+            function immediat(){
+                var aId = $("#aId").val();
+                $.get("../MData/show_join_imm?aId="+aId,imm);
+            }function imm(data){
+                $("#show_act_imm").html(data);
+            }
+            
             function join(){
                 var aId = $("#aId").val(); 
                 var partner = $("#partner").val();
-                var num;
+                var eId;
                 var insert_partner;
-                if(num=prompt("請輸入員工編號"))
+                if(eId=prompt("請輸入員工編號"))
                 {  
                     if(partner == 'y'){//可以攜伴
                         if(insert_partner=prompt("請輸入攜伴人數","0")){
                             //alert("你按下確認，員工編號為：："+num+" 攜伴人數："+partner);
-                             $.get("../UData/join_act?aId="+aId+"&num="+num+"&partner="+insert_partner,res);
+                            $("#show_checking").html("<center><h1><strong>申請處理中，請稍後</strong><h1></center>");
+                             $.get("../UData/join_act?aId="+aId+"&eId="+eId+"&partner="+insert_partner,res);
                         }else
-                        {
+                        {   
+                            $("#show_checking").html("");
                             alert("報名失敗");
                         }
                     }else{//不能攜伴
-                        $.get("../UData/join_act?aId="+aId+"&num="+num,res);
+                        $("#show_checking").html("<center><h1><strong>申請處理中，請稍後</strong><h1></center>");
+                        $.get("../UData/join_act?aId="+aId+"&eId="+eId,res);
                     }
                 }
                 else
                 {
+                    $("#show_checking").html("");
                     alert("報名失敗");
                 } 
                 
             }
             function res(data){
-              
+                $("#show_checking").html("");
                 alert(data); 
                 window.location.href="../Home/show_act?aId="+$("#aId").val();
             
@@ -75,7 +88,7 @@ date_default_timezone_set("Asia/Taipei");
                     <?php echo $key['body']; ?>
                 </CENTER></td>
                 <td><CENTER>
-                    <?php echo $key['join_num']."/".$key['num']?>
+                    <div id="show_act_imm"><strong>讀取中...</strong></div>
                 </CENTER></td>
                 <td><CENTER>
                     <?php echo $key['partner']; ?>
@@ -121,6 +134,6 @@ date_default_timezone_set("Asia/Taipei");
             </tr>
         </table>
         <?php } ?>
-       
+        <div id="show_checking"></div>
     </body>
 </html>

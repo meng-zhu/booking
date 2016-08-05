@@ -10,7 +10,7 @@ class HomeController extends Controller {
     /* 跳轉到 主頁面(index.php) 頁面 */
     function index() {
          /* 指定丟給哪個 models */
-        $result = $this->model("crud");
+        $result = $this->model("act");
         $db = $this->db();
         /* 要執行哪個 function 並且給值 */
         $row = $result->act_list($db);
@@ -21,7 +21,7 @@ class HomeController extends Controller {
         $aId = $_GET['aId'];
         // echo $aId;
          /* 指定丟給哪個 models */
-        $result = $this->model("crud");
+        $result = $this->model("act");
         $db = $this->db();
         /* 要執行哪個 function 並且給值 */
         $row = $result->show_act($db,$aId);

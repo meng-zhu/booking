@@ -15,7 +15,7 @@ class MHomeController extends Controller {
     function index() {
         
         /* 指定丟給哪個 models */
-        $result = $this->model("crud");
+        $result = $this->model("act");
         $db = $this->db();
         /* 要執行哪個 function 並且給值 */
         $row = $result->act_list($db);
@@ -31,13 +31,25 @@ class MHomeController extends Controller {
     function update_act() {
         $aId = $_GET['aId'];
         /* 指定丟給哪個 models */
-        $result = $this->model("crud");
+        $result = $this->model("act");
         $db = $this->db();
         /* 要執行哪個 function 並且給值 */
         $row = $result->show_act($db,$aId);
         $this->view("management/update_act",$row);
     }
-    
+    function can_join(){
+        $aId = $_GET['aId'];
+        /* 指定丟給哪個 models */
+        $result = $this->model("act");
+        $db = $this->db();
+        /* 要執行哪個 function 並且給值 */
+        $row = $result->show_act($db,$aId);
+        foreach($row as $key){
+            $name = $key['name'];
+        }
+        
+        $this->view("management/can_join",$aId,$name);
+    }
     
 }
 ?>
